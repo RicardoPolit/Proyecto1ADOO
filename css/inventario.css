@@ -1,0 +1,86 @@
+@media (min-width:700px),(max-width: 1680px) {
+    .cuerpoI{
+        width:100%;
+        font-family:"Trebuchet MS",Helvetica,sans-serif;
+        background-color: #c4b5a2;
+    }
+
+    .containerI{
+        width:100%;
+        height: 90%;
+        background-image: url("../img/bkg5.jpg");
+        background-size: cover;
+        background-repeat:no-repeat;
+        background-attachment: fixed;
+        position: absolute;
+        margin-top:7%;
+        margin-left:-10px;
+        -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    }
+
+    .filtro{
+
+        width:20%;
+        height: 70%;
+        margin-left: 4%;
+        margin-top:1%;
+        background-color: white;
+        float: left;
+        -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    }
+
+    .muebles{
+        width:70%;
+        height: 95%;
+        margin-left: 4%;
+        margin-top:1%;
+        background-color: transparent;
+        float: left;
+    }
+
+    #muebles{
+        width: 100%;
+        height: 100%;
+
+    }
+
+    #mueble{
+        width:60%;
+        height:30%;
+        float: left;
+        background-color: #c4746c;
+    }
+
+    #modelo{
+        width:100%;
+    }
+
+    #modelo h1{
+        background-color: crimson;
+        text-align: center;
+        text-shadow: 1px 1px black;
+        color:white;
+        height: 10%;
+        margin-top: -0.5%;
+    }
+
+    #imagen img{
+        background-color: white;
+        width: 100%;
+        height: 70%;
+        margin-top: -5.5%;
+    }
+
+    #descripcion{
+        color:white;
+        font-size:large;
+
+    }
+
+
+
+}

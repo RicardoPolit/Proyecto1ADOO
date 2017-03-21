@@ -1,0 +1,142 @@
+﻿CREATE DATABASE mueblesquetzal
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'en_US.UTF-8'
+    LC_CTYPE = 'en_US.UTF-8'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+    
+    SELECT * FROM Cliente;
+    SELECT * FROM personaFisica;
+    SELECT * FROM personaMoral;
+    SELECT * FROM Domicilio;
+    
+    CREATE TABLE Tarjeta(
+    	rfc char(13) not null,
+        sec char(3) ,
+        num char(16),
+        f_V date,
+        marca char(10),
+        tipo char(2),
+        
+        constraint cuetarjeta
+        	primary key(rfc,sec,num),
+        constraint cueTaCliente
+        	foreign key(rfc) references Cliente(rfc)
+    
+    );
+    SELECT * FROM Tarjeta;
+    
+    DELETE FROM Cliente;
+    DELETE FROM Domicilio;
+    DELETE FROM personaFisica;
+    DELETE FROM Tarjeta;
+    
+    CREATE TABLE Mueble(
+    	modelo char(5) not null,
+        nombre char(10) not null,
+        precio float,
+        ancho float not null,
+        largo float not null,
+        altura float not null,
+        foto bytea,
+        categoria char not null,
+        descripcion char(500),
+        
+      	constraint cueMueble
+        	primary key(modelo,nombre)
+    );
+    
+    
+    CREATE TABLE Materiales(
+    	tipo char(10) not null,
+        caract char(500),
+        constraint cueMaterial
+        	primary key(tipo)
+    );
+    
+    CREATE TABLE materialdeMueble(
+    	modelo char(5) not null,
+        nombre char(10) not null,
+        tipo char(10)not null,
+        constraint cuematerialDeMueble
+        	primary key(modelo,nombre,tipo),
+        constraint cuemamaterial
+        	foreign key (tipo) references Materiales(tipo),
+        constraint cuemaMueble
+        	foreign key(modelo,nombre) references Mueble(modelo,nombre)
+    );
+    
+    
+    CREATE TABLE Acabados(
+        nombreAc char(10) not null,
+        aca bytea,
+        constraint cueAcabado
+        	primary key(nombreAc)
+       );
+    
+    CREATE TABLE tieneAc(
+        modelo char(5) not null,
+        nombre char(10) not null,
+   		nombreAc char(10) not null,
+        constraint cuetieneAc
+        	primary key(modelo,nombre,nombreAc),
+        constraint cueaAc
+        	foreign key(nombreAc) references Acabados(nombreAc),
+        constraint cueaMueble
+        	foreign key(modelo,nombre) references Mueble(modelo,nombre)
+    );
+    
+    SELECT * FROM Mueble;
+    
+    SELECT * FROM Mueble,tieneAc,materialdeMueble WHERE Mueble.modelo = tieneAc.modelo AND Mueble.modelo =  materialdeMueble.modelo;
+    
+    /*
+    Tablas
+    */
+    CREATE TABLE Cliente(
+    	nombres char(20) not null,
+        rfc char(13) not null,
+        tel char(15) not null,
+        notif bool,
+        pwd char(60) not null,
+        
+        constraint cueCliente
+        	primary key(rfc),
+   
+    );
+    CREATE TABLE Domicilio(
+    	rfc char(13) not null,
+        cp char(5) not null,
+        calle char(50) not null,
+        ciudad char(30) not null,
+        tipo char(2),
+        
+        constraint cueDomicilio
+        	primary key(rfc,cp,calle),
+        constraint cuedomAcliente
+        	foreign key(rfc) references Cliente(rfc)
+    );
+    
+    CREATE TABLE personaFisica(
+    	rfc char(13) not null,
+        apellidos char(30) not null,
+        email char(40) not null
+        
+        constraint cuepF
+        	primary key(rfc,correo),
+        constraint cuepFaCliente
+        	foreign key(rfc) references Cliente(rfc)
+    );
+    
+    CREATE TABLE personaMoral(
+    	rfc char(13) not null,
+        rs char(50)not null,
+        
+        constraint cuepM
+        	primary key(rfc),
+        constraint cuepMaCliente
+        	foreign key(rfc) references Cliente,
+    );
+   
